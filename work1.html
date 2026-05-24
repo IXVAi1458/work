@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人技术作品集</title>
+    <style>
+   
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f0f2f5;
+            color: #1e293b;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 800px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+     
+        .navbar {
+            display: flex;
+            background: #ffffff;
+            border-bottom: 1px solid #eef1f5;
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 18px 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            font-size: 0.95rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            color: #1e293b;
+            background: #f8fafc;
+        }
+
+        .nav-item.active {
+            color: #0f172a;
+            border-bottom-color: #2563eb;
+            font-weight: 600;
+        }
+
+   
+        .content-area {
+            padding: 35px 30px;
+            min-height: 420px;
+            animation: fadeSlide 0.35s ease;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+      
+        .page-panel {
+            display: none;
+        }
+
+        .page-panel.active {
+            display: block;
+        }
+
+    
+        .page-panel h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f0f2f6;
+        }
+
+        .page-panel h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 24px 0 12px;
+        }
+
+        .page-panel p,
+        .page-panel li {
+            color: #334155;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+     
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.93rem;
+        }
+
+        .tag.primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+     
+        .timeline {
+            margin-top: 16px;
+            position: relative;
+            padding-left: 24px;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .timeline-item {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #e2e8f0;
+        }
+
+        .timeline-item strong {
+            display: block;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+      
+        .video-placeholder {
+            margin: 24px 0 12px;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 500;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 3rem;
+            margin-bottom: 8px;
+            opacity: 0.6;
+        }
+
+        .video-placeholder .hint {
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.8);
+            padding: 4px 14px;
+            border-radius: 20px;
+        }
+
+    
+        .footer-bar {
+            text-align: center;
+            padding: 18px 30px;
+            border-top: 1px solid #eef1f5;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-bar span {
+            color: #2563eb;
+        }
+
+    
+        @media (max-width: 500px) {
+            .nav-item {
+                font-size: 0.8rem;
+                padding: 14px 4px;
+            }
+            .content-area {
+                padding: 24px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+ 
+        <nav class="navbar">
+            <div class="nav-item active" data-page="home">🏠 首页</div>
+            <div class="nav-item" data-page="skills">💻 技术能力</div>
+            <div class="nav-item" data-page="projects">📂 项目经历</div>
+            <div class="nav-item" data-page="strength">🚀 个人优势</div>
+        </nav>
+
+    
+        <div class="content-area">
+
+        
+            <div class="page-panel active" id="home">
+                <h2>个人简介</h2>
+                <p>
+                    我是北京科技大学<strong>计算机与通信工程学院</strong>计算机专业的大一学生，
+                    <strong>丁佳奇</strong>。
+                </p>
+                <p>
+                    目前主攻 <strong>C++</strong>，系统掌握了面向对象程序设计、数据结构和基础算法。
+                    通过实际项目锻炼了独立开发和调试能力，对技术有强烈的好奇心与自驱力。
+                    另外我还自学了<strong>html,css,javascript前端制作</strong>，能够进行网页前端设计
+                </p>
+                <p>
+                    以下页面展示了我的技术、两个完整的C++项目。
+                    希望能通过这份作品集，让您快速了解我的技术热情和实际能力。
+                </p>
+            </div>
+
+            <div class="page-panel" id="skills">
+                <h2>技术能力</h2>
+            
+                <h3>核心编程基础</h3>
+                <div class="tag-group">
+                    <span class="tag accent">C / C++</span>
+                    <span class="tag">数据结构</span>
+                    <span class="tag">算法基础</span>
+                    <span class="tag">面向对象设计</span>
+                    <span class="tag">内存管理</span>
+                </div>
+                <p>
+                    经过系统学习与大量上机练习，我能熟练使用 C++ 解决各类问题，把项目落实。
+                </p>
+            
+                <h3>前端开发</h3>
+                <div class="tag-group">
+                    <span class="tag accent">HTML5</span>
+                    <span class="tag">CSS3 / Flex / Grid</span>
+                    <span class="tag">响应式设计</span>
+                    <span class="tag">JavaScript 基础</span>
+                    <span class="tag">页面交互逻辑</span>
+                </div>
+                <p>
+                    为了做出您现在看到的这个作品展示站，我系统学习了前端基础。从零搭建出结构良好、风格统一的页面，并在手机上也能舒适浏览。我已经能用这些技能把想法变成真实的网页界面。
+                </p>
+            
+            
+            
+            </div>
+
+     
+            <div class="page-panel" id="projects">
+                <h2>项目经历</h2>
+
+              
+                <h3>🎮 项目一：飞机大战小游戏</h3>
+                <p>基于<strong>C++</strong>开发的经典射击游戏，完全独立编码实现。</p>
+
+                <div class="video-placeholder">
+                    
+                    <div class="hint">飞机大战演示视频</div>
+                   
+                    <video controls src="C:\Users\IXVAi\Desktop\111.mp4" style="position:static;width:100%;height:auto;"></video>
+                  
+                  
+                </div>
+
+             
+                <h3>🏦 项目二：银行账户管理系统</h3>
+                <p>控制台应用程序，模拟银行的核心业务逻辑，注重数据安全与交互体验。</p>
+
+                <div class="video-placeholder">
+                   
+                    <div class="hint">银行管理系统演示视频</div>
+                    <video controls src="C:\Users\IXVAi\Desktop\222.mp4" style="position:static;width:100%;height:auto;"></video>
+                </div>
+            </div>
+
+      
+            <div class="page-panel" id="strength">
+                <h2>个人优势与工作态度</h2>
+
+                <h3>解决实际问题的能力</h3>
+                <p>能够将想法落地，将实际要求通过代码程序实现。</p>
+
+                <h3>自驱学习能力</h3>
+                <p>前端知识学校没有教，为了制作此网页，我自学了基础的前端知识，制作了这个网页</p>
+
+                <h3>对团队的期待</h3>
+                <p>
+                    我希望加入一个重视技术、鼓励实践的技术团队，在真实项目中锤炼自己，
+                    同时用我已经具备的C++功底和项目经验为团队提供直接的技术支持。
+                    我已经准备好接受任务，无论是底层逻辑实现、性能优化还是模块设计，我都乐于承担。
+                </p>
+            </div>
+
+        </div>
+
+    
+        <div class="footer-bar">
+           用代码创造价值
+        </div>
+    </div>
+
+ 
+    <script>
+        const navItems = document.querySelectorAll('.nav-item');
+        const pagePanels = document.querySelectorAll('.page-panel');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const targetPage = this.getAttribute('data-page');
+
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+
+                pagePanels.forEach(panel => panel.classList.remove('active'));
+                document.getElementById(targetPage).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
